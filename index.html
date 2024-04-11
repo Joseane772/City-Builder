@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Citybuilder</title>
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three/examples/jsm/"
+        }
+      }
+    </script>
+</head>
+<body>
+    <div id="root-window">
+      <div id="render-target">
+        <div id="ui-toolbar">
+          <button id="button-destroy" class="ui-button selected" onclick="setActiveTool(event,'destroy')">DESTROY</buttonid>
+          <button id="button-residential" class="ui-button" onclick="setActiveTool(event,'residential')">RESIDENTIAL</button>
+          <button id="button-industrial" class="ui-button" onclick="setActiveTool(event,'industrial')">INDUSTRIAL</button>
+          <button id="button-commercial" class="ui-button" onclick="setActiveTool(event,'comercial')">COMERCIAL</button>
+          <button id="button-road" class="ui-button" onclick="setActiveTool(event,'road')">ROAD</button>
+        </div>
+      </div>
+    </div>
+    <script type="module">
+      import { createGame } from '/js/game.js';
+      
+      
+      let selectedControl = document.getElementById('button-destroy');
+      window.onload = () => {
+        window.game = createGame();
+      }
+
+      window.setActiveTool = (event, toolId) => {
+        if (selectedControl) {
+          selectedControl.classList.remove('selected');
+        }
+        selectedControl = event.target;
+        selectedControl.classList.add('selected');
+
+        window.game.setActiveToolId(toolId);
+      }
+
+      window.addEventListener('resize', () => {
+        window.game.resize();
+      });
+
+    </script>
+</body>
+</html>
