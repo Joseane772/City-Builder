@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 export function createCamera(gameWindow) {
 
@@ -7,7 +8,7 @@ export function createCamera(gameWindow) {
     const MIDDLE_MOUSE_BUTTON = 1;
     const RIGHT_MOUSE_BUTTON = 2;
 
-    const MIN_CAMERA_RADIUS = 5;
+    const MIN_CAMERA_RADIUS = 2;
     const MAX_CAMERA_RADIUS = 25;
 
     const MIN_ELEVATION = 10;
@@ -22,7 +23,7 @@ export function createCamera(gameWindow) {
     const Y_AXIS = new THREE.Vector3(0, 1, 0);
 
     const camera = new THREE.PerspectiveCamera(75, gameWindow.clientWidth / gameWindow.clientHeight, 0.1, 1000);
-    let cameraOrigin = new THREE.Vector3(0, 0, 0);
+    let cameraOrigin = new THREE.Vector3(9, 0, 5);
     let cameraRadius = (MIN_CAMERA_RADIUS + MAX_CAMERA_RADIUS) / 2;
     let cameraAzimuth = 136;
     let cameraElevation = 45;

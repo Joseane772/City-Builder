@@ -1,13 +1,13 @@
 import * as THREE from 'three'
 import { createCamera } from './camera.js';
-import { createAssetsInstance } from './assets.js';
-
+import { createAssetsInstance } from './assets/assets.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 export function createScene() {
   
   const gameWindow = document.getElementById("render-target");
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x999999);
+  scene.background = new THREE.Color(0x333333);
 
   const camera = createCamera(gameWindow);
 
@@ -17,6 +17,9 @@ export function createScene() {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   gameWindow.appendChild(renderer.domElement);
+
+  
+
 
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
@@ -45,6 +48,26 @@ export function createScene() {
     }
 
     setupLights();
+
+    // add a house to the scene
+    
+    const loader = new GLTFLoader();
+    loader.load('/js/assets/Voxel_Buildings/dist/obj/1.glb', (gltf) => {
+      const object = gltf.scene;
+      object.scale.set(0.1, 0.1, 0.1);
+      object.position.set(2, 0, 2);
+      object.traverse((child) => {
+        if (child.isMesh) {
+          child.material = new THREE.MeshPhongMaterial({color: 0x999999});
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+      scene.add(object);
+    
+    }, undefined, function (error) {
+      console.error(error);
+    });
   }
 
   function update(city) {
@@ -71,19 +94,19 @@ export function createScene() {
   }
 
   function setupLights() {
-    const sun = new THREE.DirectionalLight(0xffffff, 1);
-    sun.position.set(20, 20, 20);
+    const sun = new THREE.DirectionalLight(0xffffff, 1.1);
+    sun.position.set(20, 15, 20);
     sun.castShadow = true;
-    sun.shadow.camera.left = -10;
-    sun.shadow.camera.right = 10;
-    sun.shadow.camera.top = 0;
-    sun.shadow.camera.bottom = -10;
-    sun.shadow.mapSize.width = 1024;
-    sun.shadow.mapSize.height = 1024;
+    sun.shadow.camera.left = -100;
+    sun.shadow.camera.right = 100;
+    sun.shadow.camera.top = 100;
+    sun.shadow.camera.bottom = -100;
+    sun.shadow.mapSize.width = 4069;
+    sun.shadow.mapSize.height = 4069;
     sun.shadow.camera.near = 0.5;
     sun.shadow.camera.far = 50;
     scene.add(sun);
-    scene.add(new THREE.AmbientLight(0xffffff,0.2));
+    scene.add(new THREE.AmbientLight(0xffffff,0.4));
     //const helper = new THREE.CameraHelper( sun.shadow.camera );
     //scene.add( helper );
   }
@@ -115,7 +138,7 @@ export function createScene() {
         selectedObject.material.emissive.setHex(0x000000);
       }
       selectedObject = intersetions[0].object;
-      selectedObject.material.emissive.setHex(0x555555);
+      selectedObject.material.emissive.setHex(0x999999);
       //console.log(selectedObject.userData);
 
       if (this.onObjectSelected) {
@@ -130,6 +153,29 @@ export function createScene() {
 
   function onMouseMove(event) {
     camera.onMouseMove(event);
+
+
+    mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+    mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera.camera);
+
+    let intersetions = raycaster.intersectObjects(scene.children, false);
+
+    // if the mouse is over an object make it glow
+    if (intersetions.length > 0) {
+      if (selectedObject) {
+        selectedObject.material.emissive.setHex(0x000000);
+      }
+      selectedObject = intersetions[0].object;
+      selectedObject.material.emissive.setHex(0x555555);
+    } else {
+      if (selectedObject) {
+        selectedObject.material.emissive.setHex(0x000000);
+      }
+      selectedObject = undefined;
+    }
+
   }
 
   function resize() {
