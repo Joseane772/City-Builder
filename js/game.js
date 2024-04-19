@@ -1,7 +1,7 @@
 import * as THREE from 'three'
-import { createScene } from '/js/scene.js';
-import { createCity } from '/js/city.js';
-import buildingFactory from '/js/buildings.js';
+import { createScene } from './scene.js';
+import { createCity } from './city.js';
+import buildingFactory from './buildings.js';
 
 export function createGame(){
 
