@@ -15,7 +15,7 @@ function loadTexture(url) {
 }
 
 const textures = {
-    'grass': loadTexture('/js/assets/Textures/grass.jpg')
+    'grass': loadTexture('./Textures/grass.jpg')
 }
 
 
@@ -32,7 +32,7 @@ const assets = {
     },
     'residential': (x,y,data) => {
 
-        objLoader.load('/js/assets/Voxel_Buildings/dist/obj/1.glb', (gltf) => {
+        objLoader.load('./Voxel_Buildings/dist/obj/1.glb', (gltf) => {
             const building = gltf.scene;
             
             building.userData = { id: 'residential', x, y}
