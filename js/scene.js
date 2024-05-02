@@ -111,6 +111,12 @@ export function createScene() {
     //scene.add( helper );
   }
 
+  // fog
+  function setupFog() {
+    scene.fog = new THREE.Fog(0x333333, 0.0, 150);
+    
+  }
+
   function draw() {
     renderer.render(scene, camera.camera);
   }

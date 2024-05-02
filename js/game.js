@@ -8,7 +8,7 @@ export function createGame(){
     let activeToolId ='';
 
     const scene = createScene();
-    const city = createCity(16);
+    const city = createCity(24);
     
     
     scene.initialize(city);

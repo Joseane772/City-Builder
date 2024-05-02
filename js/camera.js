@@ -115,6 +115,21 @@ export function createCamera(gameWindow) {
         camera.updateProjectionMatrix();
     }
 
+
+
+
+//camera.position.z = 5;
+//
+//const controls = new OrbitControls(camera, renderer.domElement);
+//
+//// This will update the camera's position every time the user interacts with the controls
+//function animate() {
+//    requestAnimationFrame(animate);
+//    controls.update();
+//}
+
+    //animate();
+
     return {
         camera,
         onMouseDown,
