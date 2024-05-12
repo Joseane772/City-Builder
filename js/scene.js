@@ -52,7 +52,7 @@ export function createScene() {
     // add a house to the scene
     
     const loader = new GLTFLoader();
-    loader.load('/js/assets/Voxel_Buildings/dist/obj/1.glb', (gltf) => {
+    loader.load('/js/assets/Voxel_Buildings/dist/obj/2.glb', (gltf) => {
       const object = gltf.scene;
       object.scale.set(0.1, 0.1, 0.1);
       object.position.set(2, 0, 2);
