@@ -1,8 +1,8 @@
 export default {
   "under-construction": {
     "type": "zone",
-    "filename": "1.glb",
-    "scale": 3
+    "filename": "cyberpunk_building.glb",
+    "scale": 2
   },
   "residential-A1": {
     "type": "zone",
@@ -118,7 +118,8 @@ export default {
   },
   "power-line": {
     "type": "power",
-    "filename": "power_line_pole_modified.glb"
+    "filename": "pilon.glb",
+    "scale": 3.5
   },
   "road-straight": {
     "type": "road",

@@ -1,6 +1,6 @@
 export default {
   // Set the base directory for GitHub pages
-  base: '/simcity-threejs-clone/',
+  base: '/city-Building-Game/',
 
   // Set the project root directory (relative to the config file)
   root: './src',
@@ -10,6 +10,7 @@ export default {
   
   // Set the build output directory
   build: {
-    outDir: './dist'
+    outDir: './dist',
+    chunkSizeWarningLimit: 1600,
   }
 }

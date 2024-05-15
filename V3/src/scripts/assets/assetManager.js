@@ -17,8 +17,8 @@ export class AssetManager {
   };
 
   statusIcons = {
-    'no-power': this.#loadTexture(`${baseUrl}statusIcons/no-power.png`, true),
-    'no-road-access': this.#loadTexture(`${baseUrl}statusIcons/no-road-access.png`, true)
+    'no-power': this.#loadTexture(`${baseUrl}statusIcons/power.png`, true),
+    'no-road-access': this.#loadTexture(`${baseUrl}statusIcons/road.png`, true)
   }
 
   models = {};
@@ -97,6 +97,16 @@ export class AssetManager {
 
         mesh.rotation.set(0, THREE.MathUtils.degToRad(rotation), 0);
         mesh.scale.set(scale / 30, scale / 30, scale / 30);
+
+        // every model exept the gound has a light inside
+        if (filename != 'tile-plain_grass.glb') {
+          
+          const light = new THREE.PointLight(0xffffff ,10 ,5);
+          light.position.set(0, 0, 0);
+          mesh.add(light);
+        }
+
+
 
         this.models[name] = mesh;
 
