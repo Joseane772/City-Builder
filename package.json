@@ -1,6 +1,6 @@
 {
   "homepage": "https://joseane772.github.io/City-Builder/",
-  "name": "City-Building-Game",
+  "name": "@joseane772/city-builder",
   "private": true,
   "version": "0.3",
   "type": "module",
