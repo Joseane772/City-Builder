@@ -103,7 +103,7 @@ export class Game {
    * Setup the lights for the scene
    */
   #setupLights() {
-    const sun = new THREE.DirectionalLight(0x555555, 2)
+    const sun = new THREE.DirectionalLight(0xffffff, 2)
     sun.position.set(-10, 20, 0);
     sun.castShadow = true;
     sun.shadow.camera.left = -20;

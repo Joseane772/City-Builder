@@ -97,14 +97,18 @@ export class AssetManager {
 
         mesh.rotation.set(0, THREE.MathUtils.degToRad(rotation), 0);
         mesh.scale.set(scale / 30, scale / 30, scale / 30);
-
+        const roads = ['tile-road-straight.glb', 'tile-road-end.glb', 'tile-road-curve.glb', 'tile-road-intersection-t.glb', 'tile-road-intersection.glb'];
         // every model exept the gound has a light inside
         if (filename != 'tile-plain_grass.glb') {
+          if (!roads.includes(filename)){
+            const light = new THREE.PointLight(0x0000ff, 100, 0.6);
+            light.position.set(0, 0, 0);
+            mesh.add(light);
+          }
           
-          const light = new THREE.PointLight(0xffffff ,10 ,5);
-          light.position.set(0, 0, 0);
-          mesh.add(light);
         }
+
+    
 
 
 
